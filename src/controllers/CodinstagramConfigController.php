@@ -1,6 +1,6 @@
 <?php
 
-namespace  Codwelt\codinstagram\controllers;
+namespace Codwelt\codinstagram\controllers;
 
 use Codwelt\codinstagram\clases\conexion;
 use Codwelt\codinstagram\clases\format;
@@ -9,6 +9,7 @@ use Codwelt\codinstagram\model\Codinstagrammodelconfig;
 use Codwelt\codinstagram\model\Codinstagrammodelscope;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Session;
 
 class CodinstagramConfigController extends Controller
 {
@@ -17,6 +18,7 @@ class CodinstagramConfigController extends Controller
     public $format;
     protected $conexion;
     protected $first;
+    public $request;
 
     public function __construct()
     {
@@ -24,6 +26,7 @@ class CodinstagramConfigController extends Controller
         $this->conexion = new conexion();
         $this->format = new format();
         $this->first = $this->tools->forceToArray(Codinstagrammodelconfig::with('Scope')->first());
+        $this->request = new Request();
 
     }
 
@@ -99,10 +102,12 @@ class CodinstagramConfigController extends Controller
         $config = $this->tools->forceToArray(Codinstagrammodelconfig::all());
         $resultado = $this->conexion->TestConexion($config[0]['ClientID'], $config[0]['RedirectUrl']);
         if ($resultado) {
-            flash('El test fue exitoso')->error();
+            Session::flush('message', 'mostrar que si funciona');
+            echo Session::get('message');
+            dd("d");
             return redirect()->route("CodinstagramConfig");
         } else {
-            flash('El test no fue exitoso')->error();
+            dd("Si no pero si funciona");
             return redirect()->route("CodinstagramConfig");
         }
     }
