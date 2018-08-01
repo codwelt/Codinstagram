@@ -1,0 +1,11 @@
+.cuerpocodinstagram{
+    padding: 2%;
+}
+.tarjeta{
+    padding-bottom: 1%;
+}
+.imagencard{
+    padding: 5%;
+    height: 30vh;
+    border: 1px solid #fff;
+}
