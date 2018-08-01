@@ -1,25 +1,25 @@
 {
     "name": "codwelt/codinstagram",
     "description": "Paquete para la conexión y logueo de un perfil a instagram y obtener los datos del mismo",
-	"type": "php",
-	"license": "MIT",
-	"homepage": "https://codwelt.com/",
-	"keywords": [
-		"laravel",
-		"codinstagram",
-		"html5",
-		"Css3",
-		"Javascript",
-		"Php",
-		"Instagram",
-		"Api"
-  ],
+    "type": "php",
+    "license": "MIT",
+    "homepage": "https://codwelt.com/",
+    "keywords": [
+        "laravel",
+        "codinstagram",
+        "html5",
+        "Css3",
+        "Javascript",
+        "Php",
+        "Instagram",
+        "Api"
+    ],
     "require": {
         "php": ">= 7",
         "laravel/framework": "^5.6",
-		"ixudra/curl": "6.*",
-		"nesbot/carbon": "~1.18",
-		"laracasts/flash": "^3.0"	
+        "ixudra/curl": "6.*",
+        "nesbot/carbon": "~1.18",
+        "laracasts/flash": "^3.0"
 
     },
     "authors": [
@@ -27,18 +27,18 @@
             "name": "FuriosoJack",
             "email": "furiosojuan0@gmail.com"
         },
-		 {
-		  "name": "Sergio Wiesner",
-		  "email": "webdev@codwelt.com"
-		}
-		
+        {
+            "name": "Sergio Wiesner",
+            "email": "webdev@codwelt.com"
+        }
+
     ],
 
     "autoload": {
         "psr-4": {
             "Codwelt\\codinstagram\\": "src"
         }
-    }
+    },
     "minimum-stability": "dev",
-    "prefer-stable" : true   
+    "prefer-stable" : true
 }
