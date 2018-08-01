@@ -1,5 +1,5 @@
 {
-  "name": "Codwelt/codinstagram",
+  "name": "codwelt/codinstagram",
   "description": "Paquete para la conexión y logueo de un perfil a instagram y obtener los datos del mismo",
   "type": "metapackage",
   "license": "MIT",
