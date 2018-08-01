@@ -34,6 +34,7 @@ class codinstagramconrtoller extends Controller
             $user = $this->first;
         } else {
             $media = null;
+            $user = null;
         }
         return view('codinstagram::index', compact('codinstagram'))
             ->with('media', $media)

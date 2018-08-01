@@ -4,7 +4,6 @@ namespace  Codwelt\codinstagram\clases;
 use Codwelt\codinstagram\model\Codinstagrammodelconfig;
 use Codwelt\codinstagram\clases\tools;
 use Codwelt\codinstagram\clases\format;
-use Codwelt\codinstagram\providers\CodinstagramServiceProviders;
 
 class apiopc
 {
@@ -17,7 +16,6 @@ class apiopc
      */
     public function __construct()
     {
-        new CodinstagramServiceProviders();
         $this->tools = new tools();
         $this->format = new format();
 
