@@ -6,7 +6,9 @@
             <h4 class="ui header">Actualice en el redirect uri de instagram a: </h4>
             <span>{{URL::current()}}</span>
             <h4 class="ui dividing header">Configuración</h4>
-
+            @if(Session::has('status'))
+                {{Session::get('status')}}
+            @endif
             @if($config != null)
                 @for($a = 0; $a < count($config); $a++)
                     <form class="ui form" method="post" action="configuracion/actualizar">
@@ -50,24 +52,24 @@
             </div>
         </div>
 
-    <div class="two wide column">
-        @if(isset($config[0]['profile_picture']))
-            @for($a = 0; $a < count($config); $a++)
-                <div class="image">
-                    <img src="{{$config[$a]['profile_picture']}}">
-                </div>
-                <div class="content">
-                    <a class="header" href="{{$config[$a]['website']}}">{{$config[$a]['website']}}</a>
-                    <div class="meta">
-                        <span class="date">{{$config[$a]['full_name']}}</span>
+        <div class="two wide column">
+            @if(isset($config[0]['profile_picture']))
+                @for($a = 0; $a < count($config); $a++)
+                    <div class="image">
+                        <img src="{{$config[$a]['profile_picture']}}">
                     </div>
-                    <div class="description">
-                        <div class="ui huge header">{{$config[$a]['username']}}</div>
-                        {{$config[$a]['bio']}}
+                    <div class="content">
+                        <a class="header" href="{{$config[$a]['website']}}">{{$config[$a]['website']}}</a>
+                        <div class="meta">
+                            <span class="date">{{$config[$a]['full_name']}}</span>
+                        </div>
+                        <div class="description">
+                            <div class="ui huge header">{{$config[$a]['username']}}</div>
+                            {{$config[$a]['bio']}}
+                        </div>
                     </div>
-                </div>
-            @endfor
-        @endif
-    </div>
+                @endfor
+            @endif
+        </div>
     </div>
 @endsection

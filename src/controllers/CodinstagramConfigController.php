@@ -20,13 +20,13 @@ class CodinstagramConfigController extends Controller
     protected $first;
     public $request;
 
-    public function __construct()
+    public function __construct(Request $re)
     {
         $this->tools = new tools();
         $this->conexion = new conexion();
         $this->format = new format();
         $this->first = $this->tools->forceToArray(Codinstagrammodelconfig::with('Scope')->first());
-        $this->request = new Request();
+        $this->request = $re;
 
     }
 
@@ -102,9 +102,8 @@ class CodinstagramConfigController extends Controller
         $config = $this->tools->forceToArray(Codinstagrammodelconfig::all());
         $resultado = $this->conexion->TestConexion($config[0]['ClientID'], $config[0]['RedirectUrl']);
         if ($resultado) {
-            Session::flush('message', 'mostrar que si funciona');
-            echo Session::get('message');
-            dd("d");
+            session('status2', 'Task was successful!2');
+            session(['status' => 'Task was successful!']);
             return redirect()->route("CodinstagramConfig");
         } else {
             dd("Si no pero si funciona");
