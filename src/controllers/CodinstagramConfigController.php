@@ -68,7 +68,7 @@ class CodinstagramConfigController extends Controller
                 ->update([
                     'flag' => null]);
 
-            return redirect('/codinstagram/Errores/'.$val);
+            return redirect('/codinstagram/Errores/'.base64_encode($val));
         }
     }
 
