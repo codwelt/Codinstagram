@@ -3,6 +3,8 @@
 namespace Codwelt\codinstagram\controllers;
 
 use Codwelt\codinstagram\clases\apiopc;
+use Codwelt\codinstagram\clases\conexion;
+use Codwelt\codinstagram\clases\format;
 use Codwelt\codinstagram\clases\tools;
 use Codwelt\codinstagram\model\Codinstagrammodelconfig;
 use Illuminate\Http\Request;
@@ -13,12 +15,16 @@ class codinstagramconrtoller extends Controller
     public $tools;
     protected $first;
     public $apiopc;
+    public $conexion;
+    public $format;
 
     public function __construct()
     {
         $this->tools = new tools();
         $this->apiopc = new apiopc();
-        $this->first = $this->tools->forceToArray(Codinstagrammodelconfig::with('Scope')->first());
+        $this->conexion = new conexion();
+        $this->format = new format();
+        $this->inthemoment = $this->tools->forceToArray(Codinstagrammodelconfig::where('use', 'u')->get());
 
     }
 
@@ -29,9 +35,9 @@ class codinstagramconrtoller extends Controller
      */
     public function index()
     {
-        if (isset($this->first['token'])) {
-            $media = $this->apiopc->ObtenerMedia($this->first['token']);
-            $user = $this->first;
+        if (isset($this->inthemoment[0]['token'])) {
+            $media = $this->apiopc->ObtenerMedia($this->inthemoment[0]['token']);
+            $user = $this->inthemoment[0];
         } else {
             $media = null;
             $user = null;
@@ -48,17 +54,37 @@ class codinstagramconrtoller extends Controller
      */
     public function create()
     {
-        if (isset($this->first['token'])) {
-            $this->apiopc->ActualizarDatoscounts($this->first['token']);
-            return json_encode(["result" => "true"]);
+        $val = $this->inthemoment;
+        if (isset($val[0])) {
+            $resultado = $this->conexion->TestToken($val[0]['token']);
+            if ($resultado == "true") {
+                return json_encode(["result" => "true"]);
+            } else {
+                $intento = $this->conexion->ObtenerToken($this->inthemoment[0]['ClientID'], $this->inthemoment[0]['ClientSecret'], $this->inthemoment[0]['RedirectUrl'], $this->inthemoment[0]['code']);
+                if ($intento == "true") {
+                    return json_encode(["result" => "true"]);
+                } else {
+                    return redirect('codinstagram/Errores/' . base64_encode($intento));
+                }
+                return redirect('codinstagram/Errores/' . base64_encode($resultado));
+            }
         } else {
             return json_encode(["result" => "false"]);
         }
     }
 
+    public function errores($error)
+    {
+        return view('codinstagram::errors', compact('codinstagram'))->with('error', base64_decode($error));
+    }
+
     public function comentarios($id)
     {
-        return json_encode($this->apiopc->ObtenerComentarios($id, $this->first['token']));
+        // return json_encode($this->apiopc->ObtenerComentarios($id, $this->inthemoment));
+    }
+
+    public function obtenerperfil(){
+        return json_encode($this->format->FormatPerfil($this->inthemoment[0]));
     }
 
     /**

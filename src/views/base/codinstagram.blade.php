@@ -14,15 +14,13 @@
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/accordion.min.js"></script>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="{{asset('/codinstagram/js/main.js')}}"></script>
 </head>
 <body>
 <section class="cuerpocodinstagram">
-    @include('flash::message')
     <div class="sixteen wide column">
         <div class="ui pointing menu">
-            <a class="active item" href="/codinstagram/inicio">
+            <a class="item" href="/codinstagram/inicio">
                 Inicio
             </a>
             <a class="item" href="/codinstagram/configuracion">
@@ -34,11 +32,8 @@
         </div>
     </div>
 </section>
-<div class="ui dimmer" id="loader">
+<div class="ui dimmer" id="loader" style="position: fixed;">
     <div class="ui huge text loader">Loading</div>
 </div>
-<script>
-    $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
-</script>
 </body>
 </html>

@@ -6,7 +6,7 @@
  * Time: 9:03 PM
  */
 
-namespace  Codwelt\codinstagram\clases;
+namespace Codwelt\codinstagram\clases;
 
 use Carbon\Carbon;
 
@@ -79,13 +79,15 @@ class format
         return $data;
     }
 
-    public function FormatComments($data){
+    public function FormatComments($data)
+    {
         dd($data);
     }
 
-    public function FormatCredentialsBd($data){
+    public function FormatCredentialsBd($data)
+    {
         $date = [];
-        for ($a = 0; $a < count($data); $a++){
+        for ($a = 0; $a < count($data); $a++) {
             $date[$a] = [
                 'id' => $data[$a]['id'],
                 'ClientID' => $data[$a]['ClientID'],
@@ -99,6 +101,22 @@ class format
             ];
         }
         return $date;
+    }
+
+    public function FormatPerfil($data)
+    {
+        $date = [
+            'username' => $data['username'],
+            'profile_picture' => $data['profile_picture'],
+            'full_name' => $data['full_name'],
+            'bio' => $data['bio'],
+            'website' => $data['website'],
+            'is_business' => $data['is_business'],
+            'media' => $data['media'],
+            'follows' => $data['follows'],
+            'followed_by' => $data['followed_by'],
+        ];
+      return $data;
     }
 
 }

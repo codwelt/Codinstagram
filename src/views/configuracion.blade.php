@@ -1,16 +1,28 @@
 @extends('codinstagram.codinstagram')
 @section('content')
     <div class="ui grid center ">
-        <div class="fourteen wide column">
-            <a href="{{URL::current()}}"><i class="redo icon"></i></a>
-            <h4 class="ui header">Actualice en el redirect uri de instagram a: </h4>
-            <span>{{URL::current()}}</span>
-            <h4 class="ui dividing header">Configuración</h4>
-            @if(Session::has('status'))
-                {{Session::get('status')}}
-            @endif
+        <div class="sixteen wide column">
+            <div class="ui grid center ">
+                <div class="eight wide column ">
+                    <a href="{{URL::current()}}"><i class="redo icon"></i></a>
+                    <h5>Configure su cliente con los siguientes pasos en el siguiete link <a target="_blank" href="https://www.instagram.com/developer/register/">Configurar</a></h5>
+                    <h4 class="ui header">1. Actualice en el redirect uri de instagram a: </h4>
+                    <span>{{URL::current()}}</span>
+                    <h4 class="ui header">2. Desactivar las autenticaciones Aouth en la misma pagina.</h4>
+                    <h4 class="ui header">3. Actualice el cliente .</h4>
+                </div>
+                <div class="eight wide column ">
+                    <img src="https://codwelt.com/storage/paquetes/codinstagram/link.PNG" alt="ejemplo">
+                </div>
+            </div>
             @if($config != null)
                 @for($a = 0; $a < count($config); $a++)
+                    @if(isset($config[0]['profile_picture']))
+                        <h2 class="ui header">
+                            <img src="{{$config[$a]['profile_picture']}}" class="ui circular image">
+                            {{$config[$a]['full_name']}} - <i>{{'@'.$config[$a]['username']}}</i><br><a class="header" target="_blank" href="{{$config[$a]['website']}}">{{$config[$a]['website']}}</a>
+                        </h2>
+                    @endif
                     <form class="ui form" method="post" action="configuracion/actualizar">
                         @csrf
                         <div class="field">
@@ -50,26 +62,6 @@
             <div id="agregarcredenciales">
 
             </div>
-        </div>
-
-        <div class="two wide column">
-            @if(isset($config[0]['profile_picture']))
-                @for($a = 0; $a < count($config); $a++)
-                    <div class="image">
-                        <img src="{{$config[$a]['profile_picture']}}">
-                    </div>
-                    <div class="content">
-                        <a class="header" href="{{$config[$a]['website']}}">{{$config[$a]['website']}}</a>
-                        <div class="meta">
-                            <span class="date">{{$config[$a]['full_name']}}</span>
-                        </div>
-                        <div class="description">
-                            <div class="ui huge header">{{$config[$a]['username']}}</div>
-                            {{$config[$a]['bio']}}
-                        </div>
-                    </div>
-                @endfor
-            @endif
         </div>
     </div>
 @endsection

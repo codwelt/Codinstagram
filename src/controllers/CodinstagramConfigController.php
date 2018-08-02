@@ -38,11 +38,11 @@ class CodinstagramConfigController extends Controller
     public function index()
     {
         if (isset($_GET['code'])) {
-            self::accesoapi($_GET['code']);
+            return self::accesoapi($_GET['code']);
         }
+
         $scope = $this->tools->forceToArray(Codinstagrammodelscope::all());
         $config = $this->format->FormatCredentialsBd($this->tools->forceToArray(Codinstagrammodelconfig::all()));
-
         return view('codinstagram::configuracion', compact('codinstagram'))
             ->with('scope', $scope)
             ->with('config', $config);
@@ -57,18 +57,18 @@ class CodinstagramConfigController extends Controller
             ]);
         $valors = $this->tools->forceToArray(Codinstagrammodelconfig::where('flag', "f")->get());
         $val = $this->conexion->ObtenerToken($valors[0]['ClientID'], $valors[0]['ClientSecret'], $valors[0]['RedirectUrl'], $codigo);
-        if ($val) {
+
+        if ($val == "true") {
             Codinstagrammodelconfig::where('flag', "f")
                 ->update([
                     'flag' => null]);
             echo "<script languaje='javascript' type='text/javascript'>window.close();</script>";
-            return json_encode(['value' => true]);
-
-        } else {
+            } else {
             Codinstagrammodelconfig::where('flag', "f")
                 ->update([
                     'flag' => null]);
-            return json_encode($val);
+
+            return redirect('/codinstagram/Errores/'.$val);
         }
     }
 
@@ -102,12 +102,9 @@ class CodinstagramConfigController extends Controller
         $config = $this->tools->forceToArray(Codinstagrammodelconfig::all());
         $resultado = $this->conexion->TestConexion($config[0]['ClientID'], $config[0]['RedirectUrl']);
         if ($resultado) {
-            session('status2', 'Task was successful!2');
-            session(['status' => 'Task was successful!']);
             return redirect()->route("CodinstagramConfig");
         } else {
-            dd("Si no pero si funciona");
-            return redirect()->route("CodinstagramConfig");
+            return redirect('codinstagram/Errores/'. base64_encode('No fue exitoso, por favor verifique datos de conexión'));
         }
     }
 

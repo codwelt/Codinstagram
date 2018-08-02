@@ -5,7 +5,8 @@
             <div class="sixteen wide column center">
                 <h2 class="ui header">
                     <img src="{{$user['profile_picture']}}" class="ui circular image">
-                    <a class="header" href="{{$user['website']}}">{{$user['full_name']}}</a>
+                    {{$user['full_name']}} <i style="font-size: 20px;"><a class="header"
+                                                                          href="{{$user['website']}}">{{'@'.$user['username']}}</a></i>
                 </h2>
             </div>
             @for($a = 0; $a < count($media); $a++)
@@ -20,8 +21,9 @@
                         <span>{{$media[$a]['user']['username']}}</span>
                     </div>
                     <div class="image content">
-                        <div class="ui Huge image">
-                            <img class="ui Huge image" src="{{$media[$a]['img']['standard_resolution']['url']}}">
+                        <div class="ui Tiny image">
+                            <img class="ui Tiny image" src="{{$media[$a]['img']['low_resolution']['url']}}"
+                                 style="width: 100%;">
                         </div>
                         <div class="description">
                             <div class="ui header">{{$media[$a]['user']['full_name']}}</div>
