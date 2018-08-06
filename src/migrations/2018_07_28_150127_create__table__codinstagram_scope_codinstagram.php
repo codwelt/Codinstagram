@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFieldFlagColum extends Migration
+class CreateTableCodinstagramScopecodinstagram extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddFieldFlagColum extends Migration
      */
     public function up()
     {
-        Schema::table('codinstagramconfig', function (Blueprint $table) {
-            $table->char('flag')->nullable($value = true);
+        Schema::create('codinstagramScope', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('scope')->nullable($value = true);
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddFieldFlagColum extends Migration
      */
     public function down()
     {
-        Schema::table('codinstagramconfig', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('codinstagramScope');
     }
 }
