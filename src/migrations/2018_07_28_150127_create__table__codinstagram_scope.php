@@ -13,7 +13,7 @@ class CreateTableCodinstagramScope extends Migration
      */
     public function up()
     {
-        Schema::create('CodinstagramScope', function (Blueprint $table) {
+        Schema::create('codinstagramScope', function (Blueprint $table) {
             $table->increments('id');
             $table->string('scope')->nullable($value = true);
             $table->softDeletes();
@@ -28,6 +28,6 @@ class CreateTableCodinstagramScope extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('CodinstagramScope');
+        Schema::dropIfExists('codinstagramScope');
     }
 }
