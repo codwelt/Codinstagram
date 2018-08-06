@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFieldTokenInstagram extends Migration
+class AddFieldFlagColumcodinstagram extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddFieldTokenInstagram extends Migration
     public function up()
     {
         Schema::table('codinstagramconfig', function (Blueprint $table) {
-            $table->string('code')->nullable($value = true)->after('ScopeId');
-            $table->string('token')->nullable($value = true)->after('ScopeId');
+            $table->char('flag')->nullable($value = true);
         });
     }
 
