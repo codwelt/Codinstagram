@@ -84,7 +84,9 @@ class codinstagramconrtoller extends Controller
     }
 
     public function obtenerperfil(){
+      if (isset($this->inthemoment[0])) {
         return json_encode($this->format->FormatPerfil($this->inthemoment[0]));
+      }
     }
 
     /**

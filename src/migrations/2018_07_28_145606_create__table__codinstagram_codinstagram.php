@@ -13,7 +13,7 @@ class CreateTableCodinstagramCodinstagram extends Migration
      */
     public function up()
     {
-        Schema::create('codinstagramConfig', function (Blueprint $table) {
+        Schema::create('codinstagramconfig', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ClientID')->nullable($value = true);
             $table->string('ClientSecret')->nullable($value = true);
@@ -31,6 +31,6 @@ class CreateTableCodinstagramCodinstagram extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('codinstagramConfig');
+        Schema::dropIfExists('codinstagramconfig');
     }
 }
